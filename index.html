@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReadMe AI | Stop Losing Deals</title>
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net"></script>
+    
+    <style>
+        :root {
+            --bg: #020617; 
+            --glass: rgba(255, 255, 255, 0.02);
+            --border: rgba(255, 255, 255, 0.08);
+            --accent: #00D2FF; 
+            --primary: #2563EB; 
+            --text-muted: #94A3B8;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--bg); color: white; line-height: 1.6; overflow-x: hidden;
+        }
+
+        /* Ambient Background */
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 10% 10%, rgba(37, 99, 235, 0.12) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 90%, rgba(0, 210, 255, 0.08) 0%, transparent 40%);
+            z-index: -1;
+        }
+
+        /* Hormozi-Style Animations */
+        @keyframes reveal {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal { animation: reveal 1s cubic-bezier(0.19, 1, 0.22, 1) forwards; opacity: 0; }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; }
+        header { padding: 2.5rem 0; text-align: center; }
+        .logo { max-width: 130px; opacity: 0.9; transition: 0.3s; }
+        .logo:hover { filter: drop-shadow(0 0 15px var(--accent)); }
+
+        .hero { text-align: center; padding: 3rem 0; }
+        .badge {
+            background: rgba(255, 255, 255, 0.05); color: #fff; padding: 6px 14px;
+            border-radius: 100px; font-size: 0.75rem; font-weight: 600; display: inline-block; 
+            margin-bottom: 2rem; border: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        h1 { 
+            font-size: clamp(2.5rem, 8vw, 4.2rem); font-weight: 800; 
+            color: #FFFFFF; margin-bottom: 1.5rem; line-height: 1.05; letter-spacing: -2px;
+        }
+        .subtitle { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 3.5rem; }
+
+        .waitlist-card {
+            background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+            backdrop-filter: blur(30px); border: 1px solid var(--border);
+            padding: 2.5rem; border-radius: 24px; max-width: 450px; margin: 0 auto;
+            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.8);
+        }
+        
+        input, select {
+            width: 100%; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border);
+            padding: 1.1rem; border-radius: 12px; color: white; font-size: 1rem; margin-bottom: 1.2rem; outline: none;
+            transition: 0.3s ease;
+        }
+        input:focus, select:focus { border-color: #fff; background: rgba(255, 255, 255, 0.06); }
+
+        .cta-button {
+            width: 100%; background: #FFFFFF; color: #000; padding: 1.2rem; border: none; border-radius: 12px;
+            font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: 0.3s;
+        }
+        .cta-button:hover { background: var(--accent); transform: scale(1.02); box-shadow: 0 0 20px rgba(0, 210, 255, 0.4); }
+
+        /* Founding Story Text */
+        .founder-note { 
+            margin-top: 1.5rem; font-size: 0.8rem; color: #475569; 
+            font-style: italic; letter-spacing: 0.5px;
+        }
+
+        /* Support Box */
+        .support-section {
+            background: var(--glass); border: 1px solid var(--border);
+            padding: 3rem; border-radius: 28px; text-align: center; margin-top: 6rem;
+        }
+        .support-btn {
+            display: inline-block; margin-top: 1.5rem; padding: 1rem 2rem;
+            background: transparent; color: #fff; border: 1px solid #fff;
+            text-decoration: none; border-radius: 12px; font-weight: 700; transition: 0.3s;
+        }
+        .support-btn:hover { background: #fff; color: #000; }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed; bottom: 30px; right: 30px;
+            background: #25D366; color: white; width: 60px; height: 60px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3); transition: 0.3s; z-index: 1000;
+            text-decoration: none;
+        }
+        .whatsapp-float:hover { transform: scale(1.1) rotate(5deg); }
+        .whatsapp-float svg { width: 32px; height: 32px; fill: white; }
+
+        #success-msg { display: none; text-align: center; }
+        .checkmark { font-size: 3rem; color: var(--accent); margin-bottom: 1rem; }
+
+        footer { text-align: center; padding: 6rem 0; color: #334155; font-size: 0.85rem; border-top: 1px solid var(--border); }
+    </style>
+</head>
+<body>
+
+    <header class="reveal">
+        <div class="container"><img src="logo.png" alt="ReadMe AI" class="logo"></div>
+    </header>
+
+    <div class="container">
+        <section class="hero reveal delay-1">
+            <span class="badge">Early Access Phase 01</span>
+            <h1>Stop losing deals <br>to silence.</h1>
+            <p class="subtitle">ReadMe AI monitors your leads and drafts personalized follow-ups to your phone. You just hit send.</p>
+            
+            <div class="waitlist-card">
+                <form id="waitlistForm">
+                    <input type="text" id="name" placeholder="Full Name" required>
+                    <input type="email" id="email" placeholder="Professional Email" required>
+                    <select id="role" required>
+                        <option value="" disabled selected>Select your role</option>
+                        <option value="realtor">Real Estate Professional</option>
+                        <option value="sales">Sales Pro / Closer</option>
+                        <option value="founder">Founder / Agency Owner</option>
+                    </select>
+                    <button type="submit" id="submitBtn" class="cta-button">Join the Waitlist</button>
+                    <p class="founder-note">Founded in SA. Built by a student founder for high-stakes pros.</p>
+                </form>
+
+                <div id="success-msg">
+                    <div class="checkmark">✓</div>
+                    <h2>You're in.</h2>
+                    <p style="color: var(--text-muted);">Check your email for priority setup instructions.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Grid -->
+        <section class="reveal delay-2" style="padding: 6rem 0;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem;">
+                <div>
+                    <h3 style="margin-bottom: 1rem;">Invisible Sync</h3>
+                    <p style="color: var(--text-muted);">ReadMe connects to your existing channels. No new app to check, no manual data entry.</p>
+                </div>
+                <div>
+                    <h3 style="margin-bottom: 1rem;">AI Drafting</h3>
+                    <p style="color: var(--text-muted);">Our AI learns your tone and references specific details from your conversation history.</p>
+                </div>
+                <div>
+                    <h3 style="margin-bottom: 1rem;">One-Tap Execution</h3>
+                    <p style="color: var(--text-muted);">Get a notification. Review the draft. Tap to send via WhatsApp or Email instantly.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Support Section -->
+        <section class="support-section reveal delay-2">
+            <h3>Support the Mission</h3>
+            <p style="color: var(--text-muted); margin-top: 1rem; max-width: 500px; margin-inline: auto;">
+                I'm a 22-year-old Electrical Engineering student building this with sweat equity. Support the development costs to accelerate our global launch.
+            </p>
+            <a href="https://pay.yoco.com" target="_blank" class="support-btn">Support the Project</a>
+        </section>
+    </div>
+
+    <!-- Floating WhatsApp Link -->
+    <a href="https://wa.me/qr/ZSL7XRDOTSOYF1" class="whatsapp-float" target="_blank" title="Talk to the Founder">
+        <svg viewBox="0 0 32 32"><path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.733 5.475 2.016 7.784l-2.016 7.216 7.392-1.941c2.193 1.156 4.693 1.815 7.348 1.815 8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 29.333c-2.392 0-4.647-0.612-6.623-1.688l-0.475-0.256-4.385 1.151 1.171-4.195-0.281-0.447c-1.189-1.901-1.884-4.148-1.884-6.564 0-7.363 5.971-13.333 13.333-13.333s13.333 5.971 13.333 13.333-5.971 13.333-13.333 13.333zM22.501 19.167c-0.356-0.179-2.105-1.039-2.441-1.161-0.336-0.121-0.581-0.183-0.825 0.183s-0.941 1.161-1.155 1.405c-0.213 0.244-0.427 0.275-0.783 0.096-0.356-0.179-1.503-0.555-2.863-1.771-1.059-0.945-1.773-2.112-1.981-2.468-0.208-0.356-0.023-0.548 0.155-0.725 0.161-0.159 0.356-0.415 0.535-0.621 0.179-0.208 0.239-0.356 0.356-0.595 0.12-0.239 0.060-0.451-0.031-0.629-0.089-0.179-0.825-1.989-1.131-2.721-0.297-0.715-0.601-0.621-0.825-0.633-0.213-0.011-0.457-0.012-0.701-0.012-0.244 0-0.641 0.091-0.976 0.457-0.336 0.366-1.281 1.251-1.281 3.051s1.312 3.537 1.495 3.781c0.183 0.244 2.583 3.944 6.255 5.525 0.873 0.376 1.555 0.601 2.087 0.769 0.877 0.279 1.675 0.239 2.305 0.145 0.703-0.105 2.105-0.86 2.401-1.689 0.296-0.829 0.296-1.543 0.208-1.689s-0.325-0.244-0.681-0.423z"></path></svg>
+    </a>
+
+    <footer>
+        <p>&copy; 2024 ReadMe AI. Built for the 1%.</p>
+    </footer>
+
+    <script>
+        const SUPABASE_URL = 'https://kpxarehfbqtltduiiuyn.supabase.co'; 
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtweGFyZWhmYnF0bHRkdWlpdXluIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4MjkwNDgsImV4cCI6MjA4OTQwNTA0OH0.kVS7Gmh-hALD0Eo9LDP4DpdGRhsDaEnGwIiZmFrv3vk';
+
+        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        document.getElementById('waitlistForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.innerText = "Connecting...";
+            btn.disabled = true;
+
+            try {
+                const { error } = await _supabase
+                    .from('waitlist') 
+                    .insert([{ 
+                        name: document.getElementById('name').value, 
+                        email: document.getElementById('email').value, 
+                        role: document.getElementById('role').value 
+                    }]);
+
+                if (error) throw error;
+                document.getElementById('waitlistForm').style.display = 'none';
+                document.getElementById('success-msg').style.display = 'block';
+            } catch (err) {
+                alert("Connection failed. Check your internet.");
+                btn.innerText = "Join the Waitlist";
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
