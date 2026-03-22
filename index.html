@@ -206,6 +206,9 @@
                     }]);
 
                 if (error) throw error;
+                
+        // Show success
+        
                 document.getElementById('waitlistForm').style.display = 'none';
                 document.getElementById('success-msg').style.display = 'block';
                 await fetch("https://kpxarehfbqtltduiiuyn.supabase.co/functions/v1/resend-email", {
