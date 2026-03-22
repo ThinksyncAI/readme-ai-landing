@@ -208,6 +208,16 @@
                 if (error) throw error;
                 document.getElementById('waitlistForm').style.display = 'none';
                 document.getElementById('success-msg').style.display = 'block';
+                await fetch("https://kpxarehfbqtltduiiuyn.supabase.co/functions/v1/resend-email", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    name: document.getElementById('name').value,
+    email: document.getElementById('email').value
+  })
+});
             } catch (err) {
                 alert("Connection failed. Check your internet.");
                 btn.innerText = "Join the Waitlist";
